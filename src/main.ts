@@ -16,11 +16,12 @@ export async function nodeHtmlToImage(options: Options) {
     quality,
     puppeteerArgs = {},
     puppeteer = undefined,
+    maxConcurrency = 2
   } = options;
 
   const cluster: Cluster<ScreenshotParams> = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_CONTEXT,
-    maxConcurrency: 2,
+    maxConcurrency: maxConcurrency,
     puppeteerOptions: { ...puppeteerArgs, headless: true },
     puppeteer: puppeteer,
   });
